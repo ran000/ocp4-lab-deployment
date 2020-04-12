@@ -54,9 +54,9 @@ mac_prefix: 52:54:00:00:fa
 
 # Still in networking. If there is bridged network, say so and tell which
 # interface. Otherwise tell which virt net to use.
-vm_use_bridge: yes
+vm_use_bridge: no
 vm_bridge_name: privbr0
-vm_network_name: ignored-if-use-bridge
+vm_network_name: ocp-network
 
 # Services VM. Even if using a bridge, there might be a need to create a second
 # interface and connect it to a bridge, as the primary interface bridge may be
@@ -69,7 +69,7 @@ vm_network_name: ignored-if-use-bridge
 # NOTE: Only do this in environments where you intend to only run one cluster,
 #       otherwise you will have a pretty nice mess on your hands thanks to IP
 #       conflicts.
-vm_svc_add_interface: yes
+vm_svc_add_interface: no
 vm_svc_add_bridge_name: br0
 vm_svc_add_macaddr: "{{ mac_prefix }}:f1"
 vm_svc_add_ipaddr: 172.25.254.21

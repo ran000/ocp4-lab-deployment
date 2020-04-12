@@ -26,7 +26,7 @@ coreos_tftp_artifacts:
 # Other package versions - these are also expected in binary_artifact_path.
 # OpenVPN and PKCS11 helper are optional, skip with --skip-tags=openvpn
 # (both are from https://epel.ip-connect.info/8/Everything/x86_64/Packages/)
-nexus_release: 3.19.1-01
+nexus_release: 3.22.0-02
 openvpn_release: 2.4.7-1
 pkcs11_release: 1.22-7
 
@@ -42,10 +42,10 @@ parent_domain: lab.example.com
 cluster_name: ocp
 
 # The forwarding DNS server to configure services VM with.
-fwd_dns_server: 172.25.254.254
+fwd_dns_server: 8.8.8.8
 
 # Similarly, the (actual) default gateway for the services VM.
-svc_default_gw: 172.25.254.252
+svc_default_gw: 172.25.250.252
 
 # Since we're talking about addressing, let's also set the MAC address and IP
 # subnet prefix here. Free for you to change, of course.

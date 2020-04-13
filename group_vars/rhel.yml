@@ -4,7 +4,7 @@
 #
 # The password is expected to be plaintext, but feel free to use Ansible Vault.
 rhel_sub_user: ran000
-rhel_sub_pass: secret
+rhel_sub_pass: Iehbr00)
 
 # If you have a very uniform RHEL system structure (or if it's only the
 # services VM you are touching), you can set some additional vars here as well,

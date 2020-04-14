@@ -41,7 +41,7 @@ parent_domain: lab.example.com
 cluster_name: ocp
 
 # The forwarding DNS server to configure services VM with.
-fwd_dns_server: 8.8.8.8
+fwd_dns_server: 172.25.254.254
 
 # Similarly, the (actual) default gateway for the services VM.
 svc_default_gw: 172.25.250.252
@@ -53,7 +53,7 @@ mac_prefix: 52:54:00:00:fa
 
 # Still in networking. If there is bridged network, say so and tell which
 # interface. Otherwise tell which virt net to use.
-vm_use_bridge: no
+vm_use_bridge: yes
 vm_bridge_name: privbr0
 vm_network_name: ocp-network
 

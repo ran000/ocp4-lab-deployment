@@ -71,7 +71,7 @@ rhel8_server
 # unfortunately expects the system to be dedicated and freshly installed from
 # scratch.
 [hypervisors]
-foundation0.ilt.example.com
+localhost
 
 [rhel8_server]
 host.example.com

@@ -41,10 +41,10 @@ parent_domain: lab.example.com
 cluster_name: ocp
 
 # The forwarding DNS server to configure services VM with.
-fwd_dns_server: 172.25.254.254
+fwd_dns_server: 192.168.100.1
 
 # Similarly, the (actual) default gateway for the services VM.
-svc_default_gw: 172.25.250.252
+svc_default_gw: 172.25.250.250
 
 # Since we're talking about addressing, let's also set the MAC address and IP
 # subnet prefix here. Free for you to change, of course.
@@ -68,7 +68,7 @@ vm_network_name: ocp-network
 # NOTE: Only do this in environments where you intend to only run one cluster,
 #       otherwise you will have a pretty nice mess on your hands thanks to IP
 #       conflicts.
-vm_svc_add_interface: no
+vm_svc_add_interface: yes
 vm_svc_add_bridge_name: br0
 vm_svc_add_macaddr: "{{ mac_prefix }}:f1"
 vm_svc_add_ipaddr: 172.25.254.21

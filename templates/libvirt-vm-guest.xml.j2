@@ -21,7 +21,7 @@
   <currentMemory unit='GiB'>{{ current_vm_mem_gb }}</currentMemory>
   <vcpu placement='static'>{{ current_vm_ncpus }}</vcpu>
   <os>
-    <type arch='x86_64' machine='pc-i440fx-rhel7.0.0'>hvm</type>
+    <type arch='x86_64' machine='pc-q35-3.1'>hvm</type>
 {% if current_vm_firstboot | default(false) %}
     <boot dev='cdrom'/>
 {% elif current_vm_netboot | default(false) %}
@@ -56,30 +56,30 @@
     <suspend-to-disk enabled='no'/>
   </pm>
   <devices>
-    <emulator>/usr/libexec/qemu-kvm</emulator>
+    <emulator>/usr/bin/qemu-kvm</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='/var/lib/libvirt/images/{{ current_vm_name }}-vda.qcow2'/>
+      <source file='/mnt/ocp_images/{{ current_vm_name }}-vda.qcow2'/>
       <target dev='vda' bus='virtio'/>
     </disk>
 {% if current_vm_firstboot | default(false) %}
     <disk type='file' device='disk'>
       <driver name='qemu' type='raw'/>
-      <source file='/var/lib/libvirt/images/{{ current_vm_name }}-fd.img'/>
+      <source file='/mnt/ocp_images/{{ current_vm_name }}-fd.img'/>
       <target dev='vdb' bus='virtio'/>
     </disk>
     <disk type='file' device='cdrom'>
       <driver name='qemu' type='raw'/>
-      <source file='/var/lib/libvirt/images/rhel-8.0-x86_64-dvd.iso'/>
-      <target dev='vdc' bus='virtio'/>
+      <source file='/mnt/ocp_images/rhel-8.0-x86_64-dvd.iso'/>
+      <target dev='vdc' bus='sata'/>
     </disk>
 {% endif %}
     <controller type='usb' index='0' model='nec-xhci'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x05' function='0x0'/>
     </controller>
-    <controller type='pci' index='0' model='pci-root'/>
-    <controller type='ide' index='0'>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x1'/>
+    <controller type='pci' index='0' model='pcie-root'/>
+    <controller type='sata' index='0'>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x1f' function='0x2'/>
     </controller>
     <controller type='virtio-serial' index='0'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
@@ -98,9 +98,9 @@
     </interface>
 {% endif %}
 {% if current_vm_name == 'services' and (vm_svc_add_interface | default(false)) %}
-    <interface type='bridge'>
+    <interface type='network'>
       <mac address='{{ vm_svc_add_macaddr }}'/>
-      <source bridge='{{ vm_svc_add_bridge_name }}'/>
+      <source network='default'/>
       <model type='virtio'/>
     </interface>
 {% endif %}

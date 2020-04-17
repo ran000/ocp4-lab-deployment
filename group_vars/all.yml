@@ -179,6 +179,9 @@ vms:
     mac: "{{ mac_prefix }}:42"
     ipaddr: "{{ ip_prefix }}.42"
 
+# This directory is external place for cluster's systems disk images
+images_dir: /mnt/ocp_images 
+
 # This user will be created in all RHEL VMs (which is basically, services).
 # By default, this user's password is "student". The SSH public key though,
 # will be published in *all* VMs, including RHEL CoreOS. The target user to

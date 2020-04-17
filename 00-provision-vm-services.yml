@@ -24,7 +24,7 @@
     - name: make sure the rhel8 iso is on the host
       copy:
         src: "{{ binary_artifact_path }}/{{ item }}"
-        dest: /mnt/ocp_images/{{ item }}
+        dest: {{ images_dir }}/{{ item }}
         owner: qemu
         group: qemu
         mode: 0644
@@ -36,14 +36,14 @@
 
     - name: kill the hard disk image (if so requested)
       file:
-        path: /mnt/ocp_images/{{ current_vm_name }}-vda.qcow2
+        path: {{ images_dir }}/{{ current_vm_name }}-vda.qcow2
         state: absent
       when: force_hd_image_recreate | default(false)
 
     # This is completely VM-specific and arbitrary. Who says 0 is disk and 1 is floppy?
     - name: check if the disk image exists already
       file:
-        path: /mnt/ocp_images/{{ item }}
+        path: {{ images_dir }}/{{ item }}
         state: file
       loop:
         - "{{ current_vm_name }}-vda.qcow2"
@@ -52,29 +52,29 @@
       ignore_errors: yes
 
     - name: create the hard disk image (if missing)
-      command: qemu-img create -f qcow2 /mnt/ocp_images/{{ current_vm_name }}-vda.qcow2 64G
+      command: qemu-img create -f qcow2 {{ images_dir }}/{{ current_vm_name }}-vda.qcow2 64G
       when: fstat.results[0].failed or (force_hd_image_recreate | default(false))
     - name: create the hard disk image (if missing)
       file:
-        path: /mnt/ocp_images/{{ current_vm_name }}-vda.qcow2
+        path: {{ images_dir }}/{{ current_vm_name }}-vda.qcow2
         owner: qemu
         group: qemu
         mode:  0644
     
     - name: create the floppy disk image (if missing)
-      command: qemu-img create -f raw /mnt/ocp_images/{{ current_vm_name }}-fd.img 1M
+      command: qemu-img create -f raw {{ images_dir }}/{{ current_vm_name }}-fd.img 1M
       when: fstat.results[1].failed
       register: createfloppy
     - name: create the floppy disk image (if missing)
       file:
-        path: /mnt/ocp_images/{{ current_vm_name }}-fd.img
+        path: {{ images_dir }}/{{ current_vm_name }}-fd.img
         owner: qemu
         group: qemu
         mode:  0644
 
     - name: format the floppy disk image
       filesystem:
-        dev: /mnt/ocp_images/{{ current_vm_name }}-fd.img
+        dev: {{ images_dir }}/{{ current_vm_name }}-fd.img
         force: yes
         fstype: ext4
         opts: -L OEMDRV
@@ -82,7 +82,7 @@
 
     - name: mount the floppy
       mount:
-        src: /mnt/ocp_images/{{ current_vm_name }}-fd.img
+        src: {{ images_dir }}/{{ current_vm_name }}-fd.img
         path: /floppy-mpoint
         fstype: ext4
         state: mounted

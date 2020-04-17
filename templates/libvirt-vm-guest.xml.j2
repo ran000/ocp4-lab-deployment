@@ -59,18 +59,18 @@
     <emulator>/usr/bin/qemu-kvm</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2'/>
-      <source file='/mnt/ocp_images/{{ current_vm_name }}-vda.qcow2'/>
+      <source file='{{ images_dir }}/{{ current_vm_name }}-vda.qcow2'/>
       <target dev='vda' bus='virtio'/>
     </disk>
 {% if current_vm_firstboot | default(false) %}
     <disk type='file' device='disk'>
       <driver name='qemu' type='raw'/>
-      <source file='/mnt/ocp_images/{{ current_vm_name }}-fd.img'/>
+      <source file='{{ images_dir }}/{{ current_vm_name }}-fd.img'/>
       <target dev='vdb' bus='virtio'/>
     </disk>
     <disk type='file' device='cdrom'>
       <driver name='qemu' type='raw'/>
-      <source file='/mnt/ocp_images/rhel-8.0-x86_64-dvd.iso'/>
+      <source file='{{ images_dir }}/rhel-8.0-x86_64-dvd.iso'/>
       <target dev='vdc' bus='sata'/>
     </disk>
 {% endif %}

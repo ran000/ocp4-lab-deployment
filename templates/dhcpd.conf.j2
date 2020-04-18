@@ -29,11 +29,32 @@ host bootstrap {
     fixed-address bootstrap.{{ cluster_name }}.{{ parent_domain }};
 }
 
-host master {
-    hardware ethernet {{ vms['master'].mac }};
+host master0 {
+    hardware ethernet {{ vms['master0'].mac }};
     option domain-name "{{ cluster_name }}.{{ parent_domain }}";
-    option host-name "{{ vms['master'].hostname }}";
-    fixed-address master.{{ cluster_name }}.{{ parent_domain }};
+    option host-name "{{ vms['master0'].hostname }}";
+    fixed-address master0.{{ cluster_name }}.{{ parent_domain }};
+}
+
+host master1 {
+    hardware ethernet {{ vms['master1'].mac }};
+    option domain-name "{{ cluster_name }}.{{ parent_domain }}";
+    option host-name "{{ vms['master1'].hostname }}";
+    fixed-address master1.{{ cluster_name }}.{{ parent_domain }};
+}
+
+host master2 {
+    hardware ethernet {{ vms['master2'].mac }};
+    option domain-name "{{ cluster_name }}.{{ parent_domain }}";
+    option host-name "{{ vms['master2'].hostname }}";
+    fixed-address master2.{{ cluster_name }}.{{ parent_domain }};
+}
+
+host worker0 {
+    hardware ethernet {{ vms['worker0'].mac }};
+    option domain-name "{{ cluster_name }}.{{ parent_domain }}";
+    option host-name "{{ vms['worker0'].hostname }}";
+    fixed-address worker0.{{ cluster_name }}.{{ parent_domain }};
 }
 
 host worker1 {
@@ -41,12 +62,5 @@ host worker1 {
     option domain-name "{{ cluster_name }}.{{ parent_domain }}";
     option host-name "{{ vms['worker1'].hostname }}";
     fixed-address worker1.{{ cluster_name }}.{{ parent_domain }};
-}
-
-host worker2 {
-    hardware ethernet {{ vms['worker2'].mac }};
-    option domain-name "{{ cluster_name }}.{{ parent_domain }}";
-    option host-name "{{ vms['worker2'].hostname }}";
-    fixed-address worker2.{{ cluster_name }}.{{ parent_domain }};
 }
 

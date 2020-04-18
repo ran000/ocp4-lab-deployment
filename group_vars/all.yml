@@ -131,7 +131,7 @@ vms:
   # These (obviously) do not provide hostname, mac, and ipaddr.
   global:
     netmask: 255.255.255.0      # changing this will make your life miserable
-    dns: "{{ ip_prefix }}.21"   # use services VM - XXX DO NOT CHANGE THIS! XXX
+    dns: "{{ ip_prefix }}.254"   # use services VM - XXX DO NOT CHANGE THIS! XXX
     tz: Europe/Moscow
     mem_gb: 6
     ncpus: 4
@@ -154,30 +154,40 @@ vms:
     gw: "{{ ip_prefix }}.250"
   services:
     hostname: services.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:21"
-    ipaddr: "{{ ip_prefix }}.21"
+    mac: "{{ mac_prefix }}:fe"
+    ipaddr: "{{ ip_prefix }}.254"
     dns: "{{ fwd_dns_server }}" # this will eventually become the forwarder
     gw: "{{ svc_default_gw }}"  # this is an actual valid default gateway
     mem_gb: 3
     ncpus: 2
   bootstrap:
     hostname: bootstrap.{{ cluster_name }}.{{ parent_domain }}
+    mac: "{{ mac_prefix }}:10"
+    ipaddr: "{{ ip_prefix }}.10"
+    mem_gb: 4
+  master0:
+    hostname: master.{{ cluster_name }}.{{ parent_domain }}
+    mac: "{{ mac_prefix }}:21"
+    ipaddr: "{{ ip_prefix }}.21"
+    mem_gb: 8
+  master1:
+    hostname: master.{{ cluster_name }}.{{ parent_domain }}
+    mac: "{{ mac_prefix }}:22"
+    ipaddr: "{{ ip_prefix }}.22"
+    mem_gb: 8
+  master2:
+    hostname: master.{{ cluster_name }}.{{ parent_domain }}
+    mac: "{{ mac_prefix }}:23"
+    ipaddr: "{{ ip_prefix }}.23"
+    mem_gb: 8
+  worker0:
+    hostname: worker0.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:31"
     ipaddr: "{{ ip_prefix }}.31"
-    mem_gb: 4
-  master:
-    hostname: master.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:40"
-    ipaddr: "{{ ip_prefix }}.40"
-    mem_gb: 8
   worker1:
     hostname: worker1.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:41"
-    ipaddr: "{{ ip_prefix }}.41"
-  worker2:
-    hostname: worker2.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:42"
-    ipaddr: "{{ ip_prefix }}.42"
+    mac: "{{ mac_prefix }}:32"
+    ipaddr: "{{ ip_prefix }}.32"
 
 # This directory is external place for cluster's systems disk images
 images_dir: /mnt/ocp_images 

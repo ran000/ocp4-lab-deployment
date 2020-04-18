@@ -28,8 +28,8 @@
     <boot dev='hd'/>
     <boot dev='network'/>
 {% elif current_vm_directboot | default(false) %}
-    <kernel>/var/lib/libvirt/images/rhcos-{{ coreos_release }}-installer-kernel</kernel>
-    <initrd>/var/lib/libvirt/images/rhcos-{{ coreos_release }}-installer-initramfs.img</initrd>
+    <kernel>{{ images_dir }}/rhcos-{{ coreos_release }}-installer-kernel</kernel>
+    <initrd>{{ images_dir }}/rhcos-{{ coreos_release }}-installer-initramfs.img</initrd>
     <cmdline>{{ coreos_boot_command_line }}</cmdline>
 {% else %}
     <boot dev='hd'/>

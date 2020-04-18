@@ -12,12 +12,12 @@
 
     - name: send existing data into oblivion
       file:
-        path: "{{ openshift_rtdata_path }}"
+        path: "{{ playbook_dir }}/{{ openshift_rtdata_path }}"
         state: absent
 
     - name: recreate cluster state directory
       file:
-        path: "{{ openshift_rtdata_path }}"
+        path: "{{ playbook_dir }}/{{ openshift_rtdata_path }}"
         state: directory
         mode: 0755
 
@@ -29,10 +29,10 @@
     - name: process installer template
       template:
         src: templates/install-config.yaml.j2
-        dest: cluster/install-config.yaml
+        dest: "{{ playbook_dir }}/{{ openshift_rtdata_path }}/install-config.yaml"
 
     - name: generate ignition configs
-      command: "{{ openshift_installer_path }} create ignition-configs --dir={{ openshift_rtdata_path }}"
+      command: "{{ playbook_dir }}/{{ openshift_installer_path }} create ignition-configs --dir={{ playbook_dir }}/{{ openshift_rtdata_path }}"
 
 - name: publish ignition configs
   hosts: services

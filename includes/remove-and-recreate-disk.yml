@@ -5,9 +5,9 @@
 # TODO: trololo. document later.
 - name: make sure the disk image is gone
   file:
-    path: /var/lib/libvirt/images/{{ current_vm_name }}-vda.qcow2
+    path: "{{ images_dir }}/{{ current_vm_name }}-vda.qcow2"
     state: absent
 
 - name: (re)create the hard disk image
-  command: qemu-img create -f qcow2 /var/lib/libvirt/images/{{ current_vm_name }}-vda.qcow2 64G
+  command: qemu-img create -f qcow2 {{ images_dir }}/{{ current_vm_name }}-vda.qcow2 64G
 ...

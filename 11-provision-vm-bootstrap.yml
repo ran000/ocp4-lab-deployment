@@ -59,8 +59,8 @@
         state: file
       register: mco_reached
       until: not mco_reached.failed
-      delay: 15
-      retries: 20
+      delay: 30
+      retries: 100
 
     - name: report success
       debug:

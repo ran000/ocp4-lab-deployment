@@ -68,7 +68,7 @@ vm_network_name: ocp-network
 # NOTE: Only do this in environments where you intend to only run one cluster,
 #       otherwise you will have a pretty nice mess on your hands thanks to IP
 #       conflicts.
-vm_svc_add_interface: yes
+vm_svc_add_interface: no
 vm_svc_add_bridge_name: br0
 vm_svc_add_macaddr: "{{ mac_prefix }}:f1"
 vm_svc_add_ipaddr: 172.25.254.21
@@ -151,7 +151,7 @@ vms:
     #       VM has been provisioned, you will have to regenerate (or otherwise
     #       fix) the DHCP server configuration.
     #gw: "{{ ip_prefix }}.199"
-    gw: "{{ ip_prefix }}.21"
+    gw: "{{ ip_prefix }}.250"
   services:
     hostname: services.{{ parent_domain }}
     mac: "{{ mac_prefix }}:21"

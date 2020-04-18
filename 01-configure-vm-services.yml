@@ -23,6 +23,7 @@
           - java-1.8.0-openjdk
           - java-1.8.0-openjdk-headless
           - nfs-utils
+          - python3
         state: latest
 
     # some certificate management stuff

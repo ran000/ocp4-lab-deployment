@@ -166,17 +166,17 @@ vms:
     ipaddr: "{{ ip_prefix }}.10"
     mem_gb: 4
   master0:
-    hostname: master.{{ cluster_name }}.{{ parent_domain }}
+    hostname: master0.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:21"
     ipaddr: "{{ ip_prefix }}.21"
     mem_gb: 8
   master1:
-    hostname: master.{{ cluster_name }}.{{ parent_domain }}
+    hostname: master1.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:22"
     ipaddr: "{{ ip_prefix }}.22"
     mem_gb: 8
   master2:
-    hostname: master.{{ cluster_name }}.{{ parent_domain }}
+    hostname: master2.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:23"
     ipaddr: "{{ ip_prefix }}.23"
     mem_gb: 8

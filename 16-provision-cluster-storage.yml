@@ -12,6 +12,7 @@
       loop: "{{ nfs_exports }}"
 
     - name: create them pvs
+      delegate_to: localhost
       command: >
         {{ oc_bin }} --kubeconfig={{ openshift_rtdata_path }}/auth/kubeconfig
         apply -f /tmp/pv-{{ item.name }}.yml
@@ -24,6 +25,7 @@
       loop: "{{ nfs_exports }}"
 
     - name: check the image-registry operator configuration
+      delegate_to: localhost
       command: >
         {{ oc_bin }} --kubeconfig={{ openshift_rtdata_path }}/auth/kubeconfig
         get configs.imageregistry.operator.openshift.io cluster -o jsonpath='{.spec.storage}'
@@ -31,9 +33,11 @@
       register: regstate
 
     - name: now fix the operator config if so required
+      delegate_to: localhost
       command: >
         {{ oc_bin }} --kubeconfig={{ openshift_rtdata_path }}/auth/kubeconfig
         patch configs.imageregistry.operator.openshift.io cluster --type=merge
         -p '{ "spec": { "storage": { "pvc": { "claim": "" } } } }'
       when: (regstate.stdout | regex_search('^map\\[\\]'))
+# todo Removed => Managed !!!!!!!!!!!!!!!!!!!
 ...

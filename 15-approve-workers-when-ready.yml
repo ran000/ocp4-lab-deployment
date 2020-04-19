@@ -11,13 +11,15 @@
           This may take a while, so be patient.
 
     - name: make sure the approval script is executable
+      delegate_to: localhost
       file:
         path: files/approve-workers.sh
         mode: 0755
         state: file
 
     - name: now just run the approval script and wait
-      command: files/approve-workers.sh {{ oc_bin }} {{ openshift_rtdata_path }} {{ vms.worker1.hostname }} {{ vms.worker2.hostname }}
+      delegate_to: localhost
+      command: files/approve-workers.sh {{ oc_bin }} {{ openshift_rtdata_path }} {{ vms.worker1.hostname }} {{ vms.worker0.hostname }}
       register: output
 
     - name: show the results

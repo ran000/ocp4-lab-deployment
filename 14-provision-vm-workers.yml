@@ -12,11 +12,39 @@
 
 - import_playbook: includes/rhcos-preflight.yml
   vars:
-    installer_target: worker1
+    installer_target: worker0
 
 - import_playbook: includes/rhcos-preflight.yml
   vars:
-    installer_target: worker2
+    installer_target: worker1
+
+- name: provision the worker0 vm
+  hosts: hypervisors
+  become: yes
+  gather_facts: no
+  vars:
+    current_vm_name: worker0
+  tasks:
+    - name: set some facts that describe worker0
+      set_fact:
+        current_vm_hostname: "{{ vms[current_vm_name].hostname }}"
+        current_vm_mac: "{{ vms[current_vm_name].mac }}"
+        current_vm_ipaddr: "{{ vms[current_vm_name].ipaddr }}"
+        current_vm_netmask: "{{ vms[current_vm_name].netmask | default(vms.global.netmask) }}"
+        current_vm_dns: "{{ vms[current_vm_name].dns | default(vms.global.dns) }}"
+        current_vm_gw: "{{ vms[current_vm_name].gw | default(vms.global.gw) }}"
+        current_vm_tz: "{{ vms[current_vm_name].tz | default(vms.global.tz) }}"
+        current_vm_mem_gb: "{{ vms[current_vm_name].mem_gb | default(vms.global.mem_gb) }}"
+        current_vm_ncpus: "{{ vms[current_vm_name].ncpus | default(vms.global.ncpus) }}"
+
+    - name: destroy and kill any existing worker0
+      include_tasks: includes/destroy-and-kill-vm.yml
+
+    - name: remove and recreate the worker0 disk image
+      include_tasks: includes/remove-and-recreate-disk.yml
+
+    - name: create and boot worker0
+      include_tasks: includes/create-and-boot-vm.yml
 
 - name: provision the worker1 vm
   hosts: hypervisors
@@ -44,34 +72,6 @@
       include_tasks: includes/remove-and-recreate-disk.yml
 
     - name: create and boot worker1
-      include_tasks: includes/create-and-boot-vm.yml
-
-- name: provision the worker2 vm
-  hosts: hypervisors
-  become: yes
-  gather_facts: no
-  vars:
-    current_vm_name: worker2
-  tasks:
-    - name: set some facts that describe worker2
-      set_fact:
-        current_vm_hostname: "{{ vms[current_vm_name].hostname }}"
-        current_vm_mac: "{{ vms[current_vm_name].mac }}"
-        current_vm_ipaddr: "{{ vms[current_vm_name].ipaddr }}"
-        current_vm_netmask: "{{ vms[current_vm_name].netmask | default(vms.global.netmask) }}"
-        current_vm_dns: "{{ vms[current_vm_name].dns | default(vms.global.dns) }}"
-        current_vm_gw: "{{ vms[current_vm_name].gw | default(vms.global.gw) }}"
-        current_vm_tz: "{{ vms[current_vm_name].tz | default(vms.global.tz) }}"
-        current_vm_mem_gb: "{{ vms[current_vm_name].mem_gb | default(vms.global.mem_gb) }}"
-        current_vm_ncpus: "{{ vms[current_vm_name].ncpus | default(vms.global.ncpus) }}"
-
-    - name: destroy and kill any existing worker2
-      include_tasks: includes/destroy-and-kill-vm.yml
-
-    - name: remove and recreate the worker2 disk image
-      include_tasks: includes/remove-and-recreate-disk.yml
-
-    - name: create and boot worker2
       include_tasks: includes/create-and-boot-vm.yml
 
     - name: announce what's going on

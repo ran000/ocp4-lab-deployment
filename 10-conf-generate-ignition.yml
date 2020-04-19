@@ -11,13 +11,15 @@
         seconds: 10
 
     - name: send existing data into oblivion
+      delegate_to: localhost
       file:
-        path: "{{ playbook_dir }}/{{ openshift_rtdata_path }}"
+        path: "{{ openshift_rtdata_path }}"
         state: absent
 
     - name: recreate cluster state directory
+      delegate_to: localhost
       file:
-        path: "{{ playbook_dir }}/{{ openshift_rtdata_path }}"
+        path: "{{ openshift_rtdata_path }}"
         state: directory
         mode: 0755
 
@@ -27,12 +29,14 @@
       register: x509_ca_cert
 
     - name: process installer template
+      delegate_to: localhost
       template:
         src: templates/install-config.yaml.j2
-        dest: "{{ playbook_dir }}/{{ openshift_rtdata_path }}/install-config.yaml"
+        dest: cluster/install-config.yaml
 
     - name: generate ignition configs
-      command: "{{ playbook_dir }}/{{ openshift_installer_path }} create ignition-configs --dir={{ playbook_dir }}/{{ openshift_rtdata_path }}"
+      delegate_to: localhost
+      command: "{{ openshift_installer_path }} create ignition-configs --dir={{ openshift_rtdata_path }}"
 
 - name: publish ignition configs
   hosts: services

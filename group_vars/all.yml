@@ -154,7 +154,7 @@ vms:
     gw: "{{ ip_prefix }}.254"
   services:
     hostname: services.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:fe"
+    mac: "{{ mac_prefix }}:fc"
     ipaddr: "{{ ip_prefix }}.252"
     dns: "{{ fwd_dns_server }}" # this will eventually become the forwarder
     gw: "{{ svc_default_gw }}"  # this is an actual valid default gateway

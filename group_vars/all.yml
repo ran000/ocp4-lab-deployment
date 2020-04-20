@@ -41,10 +41,10 @@ parent_domain: lab.example.com
 cluster_name: ocp
 
 # The forwarding DNS server to configure services VM with.
-fwd_dns_server: 192.168.100.1
+fwd_dns_server: 172.25.250.254
 
 # Similarly, the (actual) default gateway for the services VM.
-svc_default_gw: 172.25.250.250
+svc_default_gw: 172.25.250.254
 
 # Since we're talking about addressing, let's also set the MAC address and IP
 # subnet prefix here. Free for you to change, of course.
@@ -131,7 +131,7 @@ vms:
   # These (obviously) do not provide hostname, mac, and ipaddr.
   global:
     netmask: 255.255.255.0      # changing this will make your life miserable
-    dns: "{{ ip_prefix }}.254"   # use services VM - XXX DO NOT CHANGE THIS! XXX
+    dns: "{{ ip_prefix }}.252"   # use services VM - XXX DO NOT CHANGE THIS! XXX
     tz: Europe/Moscow
     mem_gb: 6
     ncpus: 4
@@ -151,11 +151,11 @@ vms:
     #       VM has been provisioned, you will have to regenerate (or otherwise
     #       fix) the DHCP server configuration.
     #gw: "{{ ip_prefix }}.199"
-    gw: "{{ ip_prefix }}.250"
+    gw: "{{ ip_prefix }}.254"
   services:
     hostname: services.{{ parent_domain }}
     mac: "{{ mac_prefix }}:fe"
-    ipaddr: "{{ ip_prefix }}.254"
+    ipaddr: "{{ ip_prefix }}.252"
     dns: "{{ fwd_dns_server }}" # this will eventually become the forwarder
     gw: "{{ svc_default_gw }}"  # this is an actual valid default gateway
     mem_gb: 3
@@ -169,7 +169,7 @@ vms:
     hostname: master0.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:21"
     ipaddr: "{{ ip_prefix }}.21"
-    mem_gb: 8
+    mem_gb: 16
   master1:
     hostname: master1.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:22"

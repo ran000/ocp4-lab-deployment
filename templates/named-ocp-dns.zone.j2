@@ -31,17 +31,11 @@ $ORIGIN {{ cluster_name }}.{{ parent_domain }}.
 bootstrap       IN      A                       {{ vms['bootstrap'].ipaddr }}
 
 master0         IN      A                       {{ vms['master0'].ipaddr }}
-master1         IN      A                       {{ vms['master1'].ipaddr }}
-master2         IN      A                       {{ vms['master2'].ipaddr }}
 etcd-0          IN      A                       {{ vms['master0'].ipaddr }}
-etcd-1          IN      A                       {{ vms['master1'].ipaddr }}
-etcd-2          IN      A                       {{ vms['master2'].ipaddr }}
 
 worker0         IN      A                       {{ vms['worker0'].ipaddr }}
 worker1         IN      A                       {{ vms['worker1'].ipaddr }}
 
-workers         IN      A                       {{ vms['worker0'].ipaddr }}
-workers         IN      A                       {{ vms['worker1'].ipaddr }}
 
 api             IN      CNAME                   services.{{ parent_domain }}.
 api-int         IN      CNAME                   services.{{ parent_domain }}.
@@ -50,10 +44,8 @@ api-int         IN      CNAME                   services.{{ parent_domain }}.
 $ORIGIN _tcp.{{ cluster_name }}.{{ parent_domain }}.
 
 _etcd-server-ssl IN     SRV 0 10 2380           etcd-0.{{ cluster_name }}.{{ parent_domain }}.
-_etcd-server-ssl IN     SRV 0 10 2380           etcd-1.{{ cluster_name }}.{{ parent_domain }}.
-_etcd-server-ssl IN     SRV 0 10 2380           etcd-2.{{ cluster_name }}.{{ parent_domain }}.
 
 $ORIGIN apps.{{ cluster_name }}.{{ parent_domain }}.
 
-*               IN      CNAME                   workers.{{ cluster_name }}.{{ parent_domain }}.
+*               IN      CNAME                   master0.{{ cluster_name }}.{{ parent_domain }}.
 

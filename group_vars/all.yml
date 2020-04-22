@@ -162,31 +162,31 @@ vms:
     ncpus: 2
   bootstrap:
     hostname: bootstrap.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:10"
+    mac: "{{ mac_prefix }}:0a"
     ipaddr: "{{ ip_prefix }}.10"
     mem_gb: 4
   master0:
     hostname: master0.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:21"
+    mac: "{{ mac_prefix }}:15"
     ipaddr: "{{ ip_prefix }}.21"
     mem_gb: 16
   master1:
     hostname: master1.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:22"
+    mac: "{{ mac_prefix }}:16"
     ipaddr: "{{ ip_prefix }}.22"
     mem_gb: 8
   master2:
     hostname: master2.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:23"
+    mac: "{{ mac_prefix }}:17"
     ipaddr: "{{ ip_prefix }}.23"
     mem_gb: 8
   worker0:
     hostname: worker0.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:31"
+    mac: "{{ mac_prefix }}:1f"
     ipaddr: "{{ ip_prefix }}.31"
   worker1:
     hostname: worker1.{{ cluster_name }}.{{ parent_domain }}
-    mac: "{{ mac_prefix }}:32"
+    mac: "{{ mac_prefix }}:20"
     ipaddr: "{{ ip_prefix }}.32"
 
 # This directory is external place for cluster's systems disk images

@@ -1,0 +1,28 @@
+---
+- name: Override Deployment for One Node
+  hosts: localhost
+  become: no
+  gather_facts: no
+  tasks:
+    - name: tell what we're doing
+      debug:
+        msg: >
+          Rescaling deployment to one replica.
+          This may take a while, so be patient.
+
+    - name: make sure the rescaleing script is executable
+      delegate_to: localhost
+      file:
+        path: files/override-deployment.sh
+        mode: 0755
+        state: file
+
+    - name: now just run the rescaling script and wait
+      delegate_to: localhost
+      command: files/override-deployment.sh {{ oc_bin }} {{ openshift_rtdata_path }} 
+      register: output
+
+    - name: show the results
+      debug:
+        var: output.stdout_lines
+...

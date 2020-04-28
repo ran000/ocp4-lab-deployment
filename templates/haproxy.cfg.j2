@@ -43,8 +43,6 @@ backend kube_api
     server bootstrap bootstrap.{{ cluster_name }}.{{ parent_domain }}:6443 check
 {% endif %}
     server master0 master0.{{ cluster_name }}.{{ parent_domain }}:6443 check
-#    server master1 master1.{{ cluster_name }}.{{ parent_domain }}:6443 check
-#    server master2 master2.{{ cluster_name }}.{{ parent_domain }}:6443 check
 
 frontend machine_config
     bind 0.0.0.0:22623
@@ -57,8 +55,6 @@ backend machine_config
     server bootstrap bootstrap.{{ cluster_name }}.{{ parent_domain }}:22623 check
 {% endif %}
     server master0 master0.{{ cluster_name }}.{{ parent_domain }}:22623 check
-#    server master1 master1.{{ cluster_name }}.{{ parent_domain }}:22623 check
-#    server master2 master2.{{ cluster_name }}.{{ parent_domain }}:22623 check
 
 frontend router_https
     bind 0.0.0.0:443
@@ -67,9 +63,7 @@ frontend router_https
 backend router_https
     balance roundrobin
     option ssl-hello-chk
-    server master0 master0.{{ cluster_name }}.{{ parent_domain }}:80 check
-#    server worker1 worker1.{{ cluster_name }}.{{ parent_domain }}:443 check
-#    server worker0 worker0.{{ cluster_name }}.{{ parent_domain }}:443 check
+    server master0 master0.{{ cluster_name }}.{{ parent_domain }}:443 check
 
 frontend router_http
     mode http
@@ -81,6 +75,4 @@ frontend router_http
 backend router_http
     mode http
     server master0 master0.{{ cluster_name }}.{{ parent_domain }}:80 check
-#    server worker1 worker1.{{ cluster_name }}.{{ parent_domain }}:80 check
-#    server worker0 worker0.{{ cluster_name }}.{{ parent_domain }}:80 check
 

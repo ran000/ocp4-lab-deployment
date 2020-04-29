@@ -63,7 +63,8 @@ frontend router_https
 backend router_https
     balance roundrobin
     option ssl-hello-chk
-    server master0 master0.{{ cluster_name }}.{{ parent_domain }}:443 check
+    server worker0 worker0.{{ cluster_name }}.{{ parent_domain }}:443 check
+    server worker1 worker1.{{ cluster_name }}.{{ parent_domain }}:443 check
 
 frontend router_http
     mode http
@@ -74,5 +75,6 @@ frontend router_http
 
 backend router_http
     mode http
-    server master0 master0.{{ cluster_name }}.{{ parent_domain }}:80 check
+    server worker0 worker0.{{ cluster_name }}.{{ parent_domain }}:80 check
+    server worker1 worker1.{{ cluster_name }}.{{ parent_domain }}:80 check
 

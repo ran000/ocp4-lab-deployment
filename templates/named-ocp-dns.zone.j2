@@ -36,6 +36,9 @@ etcd-0          IN      A                       {{ vms['master0'].ipaddr }}
 worker0         IN      A                       {{ vms['worker0'].ipaddr }}
 worker1         IN      A                       {{ vms['worker1'].ipaddr }}
 
+workers         IN      A                       {{ vms['worker0'].ipaddr }}
+workers         IN      A                       {{ vms['worker1'].ipaddr }}
+
 
 api             IN      CNAME                   services.{{ parent_domain }}.
 api-int         IN      CNAME                   services.{{ parent_domain }}.
@@ -47,5 +50,5 @@ _etcd-server-ssl IN     SRV 0 10 2380           etcd-0.{{ cluster_name }}.{{ par
 
 $ORIGIN apps.{{ cluster_name }}.{{ parent_domain }}.
 
-*               IN      CNAME                   master0.{{ cluster_name }}.{{ parent_domain }}.
+*               IN      CNAME                   workers.{{ cluster_name }}.{{ parent_domain }}.
 

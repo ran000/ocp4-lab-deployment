@@ -15,7 +15,7 @@ oc_bin: "{{ binary_artifact_path }}/oc"
 rhel8_artifacts:
   - rhel-8.0-x86_64-dvd.iso
 #  - the RHEL CoreOS release and artifacts (same, binary_artifact_path)
-coreos_release: 4.3.0-x86_64
+coreos_release: 4.4.3-x86_64
 coreos_http_artifacts:
   - rhcos-{{ coreos_release }}-metal.raw.gz
 coreos_tftp_artifacts:
@@ -25,7 +25,7 @@ coreos_tftp_artifacts:
 # Other package versions - these are also expected in binary_artifact_path.
 # OpenVPN and PKCS11 helper are optional, skip with --skip-tags=openvpn
 # (both are from https://epel.ip-connect.info/8/Everything/x86_64/Packages/)
-nexus_release: 3.22.0-02
+nexus_release: 3.23.0-03
 openvpn_release: 2.4.7-1
 pkcs11_release: 1.22-7
 
@@ -169,17 +169,17 @@ vms:
     hostname: master0.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:21"
     ipaddr: "{{ ip_prefix }}.21"
-    mem_gb: 8
+    mem_gb: 16
   master1:
     hostname: master1.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:22"
     ipaddr: "{{ ip_prefix }}.22"
-    mem_gb: 8
+    mem_gb: 16
   master2:
     hostname: master2.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:23"
     ipaddr: "{{ ip_prefix }}.23"
-    mem_gb: 8
+    mem_gb: 16
   worker0:
     hostname: worker0.{{ cluster_name }}.{{ parent_domain }}
     mac: "{{ mac_prefix }}:31"

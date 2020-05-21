@@ -4,6 +4,10 @@
   become: no
   gather_facts: no
   tasks:
+    - name: Pause for 5 minutes.
+      pause:
+        minutes: 5
+      
     - name: generate the resource definitions
       template:
         src: templates/pv.yml.j2

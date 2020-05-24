@@ -3,8 +3,10 @@
     ServerName lb.{{ parent_domain }}
     ServerAlias *.{{ cluster_name }}.{{ parent_domain }}
 
-    ProxyPass / http://localhost:81/
-    ProxyPassReverse / http://localhost:81/
+    AllowEncodedSlashes NoDecode
+
+    ProxyPass / http://localhost:8081/ nocanon
+    ProxyPassReverse / http://localhost:8081/
 
     ErrorLog "logs/proxy-error.log"
     LogLevel info

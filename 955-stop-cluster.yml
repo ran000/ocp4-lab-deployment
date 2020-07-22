@@ -1,0 +1,24 @@
+---
+- name: Stop clasters VM
+  hosts: hypervisors
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: set some facts that describe the vm
+      set_fact:
+        clustervms: "{{ groups['ocp_masters'] }}"
+
+    - name: send the shutdown to cluster's VMs
+      virt:
+        name: "{{ item.split('.')[0] }}"
+        state: shutdown
+      loop: "{{ clustervms | list }}"
+
+    - name: Pause for 1 minute.
+      pause:
+        minutes: 1
+
+    - name: report all is well and the world continues
+      debug:
+        msg: |
+          The cluster's VMs stopping process is complete. You may now move on.

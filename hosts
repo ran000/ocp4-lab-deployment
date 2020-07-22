@@ -6,7 +6,7 @@
 # This is to be able to target the services VM in plays without knowing all the
 # details.
 [services]
-services.lab.example.com
+services.lab.example.com ansible_python_interpreter=/usr/libexec/platform-python
 
 # Same shpiel with RHCOS. We need to be able to target some of them in plays.
 [ocp_bootstrap]

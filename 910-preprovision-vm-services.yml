@@ -1,0 +1,25 @@
+---
+# The hard disk image will be scratched if force_hd_image_recreate=yes.
+# Do note that his may not be necessary as it will happen automatically if the
+# kickstart file was recreated (or changed) for any reason.
+- name: provision the services VM
+  hosts: hypervisors
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: set some facts that describe the vm
+      set_fact:
+        clustervms: "{{ groups['ocp_masters'] + groups['ocp_bootstrap'] + groups['services'] }}"
+         
+    - name: Ensure /etc/hosts can resolve VMs
+      lineinfile:
+        path: /etc/hosts
+        line: "{{ vms[item.split('.')[0]].ipaddr }} {{ item }} {{ item.split('.')[0] }}"
+      loop: "{{ clustervms }}" 
+      
+    - name: report all is well and the world continues
+      debug:
+        msg: |
+          The services VM preprovisioning process is complete. You may now move on
+          to VM  provision  services on.
+...

@@ -15,8 +15,9 @@
       loop: "{{ clustervms | list }}"
 
     - name: Pause for 1 minute.
-      pause:
-        minutes: 1
+      delegate_to: localhost
+      wait_for:
+        timeout: 60
 
     - name: report all is well and the world continues
       debug:

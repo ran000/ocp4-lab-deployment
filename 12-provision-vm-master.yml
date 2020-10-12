@@ -60,6 +60,10 @@
           The master VM has now rebooted after installation and will try to
           provision itself from the bootstrap node after another reboot. This
           will take quite some time, so be patient.
+          -----------------------------------------
+          You have to wait until the Kubernetes API is ready after
+          launching the install and then apply this patch ( see comment )
+#          oc patch etcd cluster -p=’{“spec”: {“unsupportedConfigOverrides”: {“useUnsupportedUnsafeNonHANonProductionUnstableEtcd”: true}}}’ --type=merge
 
     - name: invoke wait-for bootstrap-complete
       delegate_to: localhost

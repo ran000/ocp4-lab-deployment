@@ -14,12 +14,12 @@ bootstrap.ocp.lab.example.com
 
 [ocp_masters]
 master0.ocp.lab.example.com
-master1.ocp.lab.example.com
-master2.ocp.lab.example.com
+#master1.ocp.lab.example.com
+#master2.ocp.lab.example.com
 
 [ocp_workers]
-worker0.ocp.lab.example.com
-worker1.ocp.lab.example.com
+#worker0.ocp.lab.example.com
+#worker1.ocp.lab.example.com
 
 # Mostly anything beyond this point is grouped because of group_vars.
 #

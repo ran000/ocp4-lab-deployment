@@ -1,0 +1,38 @@
+---
+- name: Start clasters VM
+  hosts: hypervisors
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: set some facts that describe the vm
+      set_fact:
+        clustervms: "{{ groups['ocp_masters'] }}"
+
+    - name: do the final boot (or at least make sure it's up)
+      virt:
+        name: "{{ item.split('.')[0] }}"
+        state: running
+#      when: vmstate[item].state != 'running'
+      loop: "{{ clustervms | list }}"
+
+    - name: Pause for 5 minutes.
+      delegate_to: localhost
+      wait_for:
+        timeout: 300
+    - name: wait for vm to finish booting
+      delegate_to: localhost
+      become: no
+      shell:
+        cmd:  'KUBECONFIG=/home/student/ocp4-lab-deployment/cluster/auth/kubeconfig ; oc get clusterversion'
+      register: cmd_res
+      retries: 20
+      delay: 30
+      ignore_errors: true
+      until: '"version" in cmd_res.stdout'  
+
+    - name: report all is well and the world continues
+      debug:
+        msg: |
+          The cluster's VMs restarting process is complete. You may now move on
+          to provision the services on it.
+...

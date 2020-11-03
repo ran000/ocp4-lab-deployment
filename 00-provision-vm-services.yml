@@ -21,14 +21,14 @@
         current_vm_mem_gb: "{{ vms[current_vm_name].mem_gb | default(vms.global.mem_gb) }}"
         current_vm_ncpus: "{{ vms[current_vm_name].ncpus | default(vms.global.ncpus) }}"
 
-    - name: make sure the rhel8 iso is on the host
-      copy:
-        src: "{{ binary_artifact_path }}/{{ item }}"
-        dest: "{{ images_dir }}/{{ item }}"
-        owner: qemu
-        group: qemu
-        mode: 0644
-      loop: "{{ rhel8_artifacts }}"
+        #    - name: make sure the rhel8 iso is on the host
+        #      copy:
+        #        src: "{{ binary_artifact_path }}/{{ item }}"
+        #        dest: "{{ images_dir }}/{{ item }}"
+        #        owner: qemu
+        #        group: qemu
+        #        mode: 0644
+        #      loop: "{{ rhel8_artifacts }}"
 
     - name: destroy and kill any existing VM if so requested
       include_tasks: includes/destroy-and-kill-vm.yml

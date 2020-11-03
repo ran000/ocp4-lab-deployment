@@ -45,7 +45,7 @@
       wait_for:
         host: "{{ current_vm_hostname }}"
         port: 22
-        delay: 10
+        delay: 160
         sleep: 10
         timeout: 600
         search_regex: OpenSSH

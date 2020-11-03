@@ -16,7 +16,12 @@
         path: /etc/hosts
         line: "{{ vms[item.split('.')[0]].ipaddr }} {{ item }} {{ item.split('.')[0] }}"
       loop: "{{ clustervms }}" 
-      
+
+    - name: Ensure sudoer's permissin for kiosk user
+      lineinfile:
+        path: /etc/sudoers.d/kiosk
+        line: "kiosk   ALL=(ALL)   NOPASSWD: ALL"
+
     - name: report all is well and the world continues
       debug:
         msg: |

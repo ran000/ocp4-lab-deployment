@@ -3,8 +3,8 @@
 # you want to put here is the RHSM credentials for subscription-manager.
 #
 # The password is expected to be plaintext, but feel free to use Ansible Vault.
-rhel_sub_user: account
-rhel_sub_pass: secret
+rhel_sub_user: ran000
+rhel_sub_pass: Iehbr00)
 
 # If you have a very uniform RHEL system structure (or if it's only the
 # services VM you are touching), you can set some additional vars here as well,
@@ -14,7 +14,7 @@ rhel_sub_pass: secret
 # Subscription Pool ID for your RHEL systems.
 # NOTE: THIS IS BOGUS DATA. REPLACE IT WITH AN ACTUAL POOL ID.
 rhel_sub_pools:
-  - 8a85f99970a288c80170c94a5d2570cb
+  - 8a85f99b6d280b0d016d5856bb36241a
 
 # Package repositories to enable/disable on the installed system.
 rhel_pkg_repos:

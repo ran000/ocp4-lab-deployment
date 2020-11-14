@@ -29,6 +29,7 @@
         group: qemu
         mode: 0644
       loop: "{{ rhel8_artifacts }}"
+      tags: copy_artifacts
 
     - name: destroy and kill any existing VM if so requested
       include_tasks: includes/destroy-and-kill-vm.yml

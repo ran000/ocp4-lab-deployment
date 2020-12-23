@@ -42,7 +42,8 @@
         {{ oc_bin }} --kubeconfig={{ openshift_rtdata_path }}/auth/kubeconfig
         patch configs.imageregistry.operator.openshift.io cluster --type=merge
         -p '{ "spec": { "storage": { "pvc": { "claim": "" } } } }'
-      when: (regstate.stdout | regex_search('^map\\[\\]'))
+      #when: (regstate.stdout | regex_search('^map\\[\\]'))
+      when: (regstate.stdout | regex_search('^{}$'))
 
     - name: now fix the operator config to be Managed
       delegate_to: localhost
@@ -50,5 +51,6 @@
         {{ oc_bin }} --kubeconfig={{ openshift_rtdata_path }}/auth/kubeconfig
         patch configs.imageregistry.operator.openshift.io cluster --type=merge
         -p '{"spec":{"managementState":"Managed"}}'
-      when: (regstate.stdout | regex_search('^map\\[\\]'))
+      #when: (regstate.stdout | regex_search('^map\\[\\]'))
+      when: (regstate.stdout | regex_search('^{}$'))
 ...

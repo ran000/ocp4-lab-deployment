@@ -70,8 +70,8 @@
     </disk>
     <disk type='file' device='cdrom'>
       <driver name='qemu' type='raw'/>
-      <source file='{{ images_dir }}/rhel-8.2-x86_64-dvd.iso'/>
-      <target dev='vdc' bus='virtio'/>
+      <source file='{{ images_dir }}/rhel-8.3-x86_64-dvd.iso'/>
+      <target dev='sda' bus='ide'/>
     </disk>
 {% endif %}
     <controller type='usb' index='0' model='nec-xhci'>

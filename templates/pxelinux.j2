@@ -2,6 +2,6 @@ DEFAULT coreinstall
 TIMEOUT 5
 PROMPT 5
 LABEL coreinstall
-    KERNEL rhcos-{{ coreos_release }}-live-kernel.x86_64
+    KERNEL rhcos-{{ coreos_release }}-live-kernel-x86_64
     APPEND initrd=rhcos-{{ coreos_release }}-live-initramfs.x86_64.img ip=dhcp rd.neednet=1 coreos.inst=yes coreos.inst.install_dev=vda coreos.live.rootfs_url=http://{{ vms['services'].hostname }}/rhcos-{{ coreos_release }}-live-rootfs.x86_64.img coreos.inst.ignition_url=http://{{ vms['services'].hostname }}/{{ installer_target }}.ign
 IPAPPEND 2

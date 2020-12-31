@@ -19,7 +19,7 @@ coreos_release: 4.6.1-x86_64
 coreos_http_artifacts:
   - rhcos-{{ coreos_release }}-live-rootfs.x86_64.img
 coreos_tftp_artifacts:
-  - rhcos-{{ coreos_release }}-live-kernel.x86_64
+  - rhcos-{{ coreos_release }}-live-kernel-x86_64
   - rhcos-{{ coreos_release }}-live-initramfs.x86_64.img
 
 # Other package versions - these are also expected in binary_artifact_path.

@@ -64,7 +64,7 @@
           You have to wait until the Kubernetes API is ready after
           launching the install and then apply this patch ( see comment )
 #          oc patch    etcd    cluster    -p='{"spec": {"unsupportedConfigOverrides": {"useUnsupportedUnsafeNonHANonProductionUnstableEtcd": true}}}'    --type=merge
-
+#          oc patch authentication cluster -p='{"spec":{"unsupportedConfigOverrides": {"useUnsupportedUnsafeNonHANonProductionUnstableOAuthServer": true}}}'  --type=merge
     - name: invoke wait-for bootstrap-complete
       delegate_to: localhost
       become: no
